@@ -7,7 +7,7 @@ use App\Randomize;
 class RandomizeController extends Controller
 {
 
-    public function show(Randomize $randomize)
+    public function retrieve(Randomize $randomize)
     {
         return $randomize;
     }
