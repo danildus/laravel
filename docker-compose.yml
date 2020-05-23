@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    ports:
+      - 8098:80
+    links:
+      - fpm
+    volumes:
+      - ./:/var/www/sites/laraveltest
+  fpm:
+    build:
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    volumes:
+      - ./:/var/www/sites/laraveltest
+    links:
+      - postgres
+  postgres:
+    image: postgres:10.11
+    ports:
+      - 54321:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=testlara
